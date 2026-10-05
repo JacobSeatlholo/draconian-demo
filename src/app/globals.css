@@ -1,0 +1,190 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-deep: var(--brand-deep);
+  --color-amber-warm: var(--amber-warm);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Draconian dark security theme (forced dark, single-page demo) */
+:root {
+  --radius: 0.75rem;
+  --background: #0b0e13;
+  --foreground: #e8edf4;
+  --card: #12161d;
+  --card-foreground: #e8edf4;
+  --popover: #151a22;
+  --popover-foreground: #e8edf4;
+  --primary: #4fa3e8;
+  --primary-foreground: #081018;
+  --secondary: #1a212b;
+  --secondary-foreground: #cdd8e5;
+  --muted: #161c25;
+  --muted-foreground: #8b98a9;
+  --accent: #182130;
+  --accent-foreground: #d9e6f5;
+  --destructive: #e5484d;
+  --border: #232a35;
+  --input: #232a35;
+  --ring: #4fa3e8;
+  --brand: #4fa3e8;
+  --brand-soft: #7cc0f5;
+  --brand-deep: #265a88;
+  --amber-warm: #f5a623;
+  --chart-1: #4fa3e8;
+  --chart-2: #f5a623;
+  --chart-3: #3ddc97;
+  --chart-4: #e5484d;
+  --chart-5: #9a8cfa;
+  --sidebar: #12161d;
+  --sidebar-foreground: #e8edf4;
+  --sidebar-primary: #4fa3e8;
+  --sidebar-primary-foreground: #081018;
+  --sidebar-accent: #182130;
+  --sidebar-accent-foreground: #d9e6f5;
+  --sidebar-border: #232a35;
+  --sidebar-ring: #4fa3e8;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(1100px 500px at 85% -10%, rgba(79, 163, 232, 0.09), transparent 60%),
+      radial-gradient(900px 420px at -10% 30%, rgba(38, 90, 136, 0.08), transparent 55%);
+    background-attachment: fixed;
+  }
+  section[id] {
+    scroll-margin-top: 84px;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), var(--font-geist-sans), sans-serif;
+  }
+
+  /* fine blueprint grid used in hero + section backgrounds */
+  .bg-blueprint {
+    background-image:
+      linear-gradient(rgba(79, 163, 232, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79, 163, 232, 0.055) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  .text-gradient-brand {
+    background: linear-gradient(100deg, #7cc0f5 0%, #4fa3e8 55%, #265a88 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* CCTV scanlines overlay */
+  .scanlines::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.028) 0px,
+      rgba(255, 255, 255, 0.028) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+    mix-blend-mode: overlay;
+  }
+
+  .card-glow {
+    box-shadow:
+      0 0 0 1px rgba(79, 163, 232, 0.12),
+      0 18px 48px -18px rgba(0, 0, 0, 0.65);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #2c3542;
+    border-radius: 3px;
+  }
+}
+
+/* REC dot pulse */
+@keyframes rec-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+.rec-dot {
+  animation: rec-pulse 1.6s ease-in-out infinite;
+}
+
+/* radar sweep for hero camera feed */
+@keyframes sweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.radar-sweep {
+  animation: sweep 7s linear infinite;
+  transform-origin: center;
+}
+
+/* slow float for decorative elements */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
