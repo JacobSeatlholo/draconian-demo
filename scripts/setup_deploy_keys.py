@@ -53,8 +53,27 @@ def fetch_github_host_keys():
     return [GITHUB_ED25519_FALLBACK]
 
 
+def _infer_key_type(b64_blob: str) -> str:
+    """Read the algorithm name from an SSH public key blob (wire format:
+    length-prefixed strings). Falls back to ssh-ed25519."""
+    import base64
+    import struct
+
+    try:
+        blob = base64.b64decode(b64_blob)
+        (n,) = struct.unpack(">I", blob[:4])
+        algo = blob[4 : 4 + n].decode()
+        if algo in ("ssh-rsa", "ssh-ed25519", "ecdsa-sha2-nistp256", "ssh-dss"):
+            return algo
+    except Exception:
+        pass
+    return "ssh-ed25519"
+
+
 def write_known_hosts():
-    lines = [f"github.com {k}" for k in fetch_github_host_keys()]
+    lines = [
+        f"github.com {_infer_key_type(k)} {k}" for k in fetch_github_host_keys()
+    ]
     data = "\n".join(lines) + "\n"
     for d in (SSH_DIR, PROJECT_DEPLOY_DIR):
         with open(os.path.join(d, "known_hosts"), "w") as f:
