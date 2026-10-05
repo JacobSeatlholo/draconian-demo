@@ -22,3 +22,21 @@ Stage Summary:
 - Real content + 6 real images from draconian.co.za integrated; lead capture works (2 test leads in SQLite).
 - Pending user action: add public key `~/.ssh/id_ed25519.pub` to GitHub, provide repo URL (e.g. git@github.com:USER/REPO.git), then push with:
   GIT_SSH=/home/z/my-project/scripts/git_ssh_paramiko.py git push -u origin main
+
+---
+Task ID: 2
+Agent: Super Z (main agent)
+Task: Final polish pass ("meticulous"), add 'Built working demo by business hustle' credit, push to GitHub via SSH.
+
+Work Log:
+- QA pass over all components/site-data/layout: lint clean, `bun run build` succeeds (Next.js 16.1.3, static / + /api routes), page renders with zero console/page errors.
+- Added "Built working demo by business hustle" credit: footer bottom-bar pill badge (Hammer icon, brand accent) + README blockquote. Verified visually via agent-browser screenshot (download/footer-credit.png).
+- Discovered sandbox restart wiped ~/.ssh (old keypair lost) AND paramiko package. Reinstalled paramiko (5.0.0) into venv.
+- New scripts/setup_deploy_keys.py: generates ed25519 keypair, caches it in /home/z/my-project/.deploy/ (gitignored) so it survives restarts, restores from cache, writes ~/.ssh/known_hosts from GitHub host keys (api.github.com/meta with hardcoded ed25519 fallback; fixed key-type prefix bug in known_hosts format).
+- New scripts/probe_github_auth.py: paramiko probe of git@github.com — confirms transport + host-key verification OK, auth fails only because new pubkey not yet registered.
+- Committed 2 commits (45bfa0b credit+keyscript, 1f23aee probe fix). Exported pubkey to download/github_deploy_key.pub.
+
+Stage Summary:
+- Site is meticulous and final: credit badge live in footer, lint/build/errors all clean. 6 commits on main, working tree clean.
+- Push BLOCKED on two user inputs: (1) register NEW pubkey ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOREQ2/gODb7bC/dJJFWL+vFZi6rsi7F1qnIoD0lta4p on GitHub (old one was wiped with sandbox), (2) repo URL (git@github.com:USER/REPO.git).
+- Once provided: git remote add origin <URL> && GIT_SSH=scripts/git_ssh_paramiko.py git push -u origin main
