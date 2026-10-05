@@ -2,7 +2,7 @@
 
 A modern single-page website concept demo for **Draconian cc** — South Africa's oldest dedicated IP surveillance house, based in Centurion, Gauteng.
 
-Built as a pitch refresh of [draconian.co.za](https://draconian.co.za/) using the company's **real information and imagery** (scraped from the live site with permission of purpose — a business development demo for the client).
+> 🔨 **Built working demo by business hustle** — a business-development pitch refresh of [draconian.co.za](https://draconian.co.za/) using the company's **real information and imagery** (scraped from the live site — a business development demo for the client).
 
 ## What's inside
 

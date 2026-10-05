@@ -1,6 +1,6 @@
 import { DraconianLogo } from "./logo";
 import { SITE, NAV_LINKS } from "@/lib/site-data";
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck, Hammer } from "lucide-react";
 
 export function Footer() {
   return (
@@ -77,15 +77,22 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border/70 pt-6 text-xs text-muted-foreground sm:flex-row">
-          <p>© {SITE.established}–2026 Draconian cc. All Rights Reserved.</p>
-          <p>
+        <div className="mt-12 space-y-3 border-t border-border/70 pt-6 text-xs text-muted-foreground">
+          <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
+            <p>© {SITE.established}–2026 Draconian cc. All Rights Reserved.</p>
+            <p className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1.5 font-medium text-foreground/90">
+              <Hammer className="h-3.5 w-3.5 text-primary" />
+              Built working demo by{" "}
+              <span className="font-semibold text-brand-soft">business hustle</span>
+            </p>
+          </div>
+          <p className="text-center text-[11px] text-muted-foreground/70 sm:text-left">
             Concept demo refresh built from{" "}
             <a
               href={SITE.original}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:text-brand-soft"
+              className="hover:text-muted-foreground"
             >
               draconian.co.za
             </a>{" "}

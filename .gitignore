@@ -65,3 +65,6 @@ server.log
 /tests/
 /Caddyfile
 /download/
+
+# deploy keys cache (never commit private keys)
+/.deploy/
